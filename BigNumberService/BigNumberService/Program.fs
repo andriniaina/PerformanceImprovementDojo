@@ -12,9 +12,9 @@ module BigNumberService =
     do 
       self.Get.["/givemeanumber/{id}"] <-
         fun x ->
-          Thread.Sleep(1000)
           let id = (((x :?> DynamicDictionary).Item "id") :?> DynamicDictionaryValue).Value :?> string |> int
-          sprintf "I choose %d" (seed + id) :> obj
+          Thread.Sleep(1000 + id * 50)
+          sprintf "I choose %d" (seed + (id % 3)) :> obj
 
 [<EntryPoint>]
 let main argv = 

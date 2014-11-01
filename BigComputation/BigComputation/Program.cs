@@ -51,13 +51,19 @@ namespace BigComputation
             {
                 return computedResult;
             }
-            long sumOfDivisors = 0;
             Console.WriteLine("Summing divisors of {0}...", bigNumber);
-            for (long probableDivisor = 1; probableDivisor <= bigNumber; probableDivisor++)
+            long sumOfDivisors = 1 + bigNumber;
+            long maxValue = bigNumber;
+            for (long probableDivisor = 2; probableDivisor < maxValue; probableDivisor++)
             {
                 if (bigNumber % probableDivisor == 0)
                 {
+                    var biggerValue = bigNumber / probableDivisor;
+                    maxValue = biggerValue;
+
                     sumOfDivisors += probableDivisor;
+                    if (probableDivisor != biggerValue)
+                        sumOfDivisors += biggerValue;
                 }
             }
             computedSumOfDivisors[bigNumber] = sumOfDivisors;

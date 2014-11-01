@@ -35,7 +35,7 @@ namespace BigComputation
             }
             timer.Stop();
             Console.WriteLine("Sum of divisors for N = {0} is {1}", N, totalSumOfDivisors);
-            Console.WriteLine("Should be 1676538857 for N = 10");
+            Console.WriteLine("Should be 1948659880 for N = 10");
             Console.WriteLine("Result found in {0} ms", timer.ElapsedMilliseconds);
             Console.ReadLine();
         }

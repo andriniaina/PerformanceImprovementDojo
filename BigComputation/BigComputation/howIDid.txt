@@ -16,3 +16,6 @@ We're now down to 3,2 seconds !
 
 We compute using long, but the value are far below the maximum int value. Changing every long to int make us save some precious miliseconds.
 We're now down to 2,8 seconds
+
+We're waiting to have all answers from the server before starting to compute. Starting to compute the sum of divisors as soon as we have the result can save us some miliseconds, once more.
+We're now down to 2,7s

@@ -17,10 +17,8 @@ namespace BigComputation
         {
             var timer = Stopwatch.StartNew();
 
-            var bigNumbers = Enumerable.Range(0, N).AsParallel().WithDegreeOfParallelism(N).Select(GetBigNumber).ToArray();
-            Console.WriteLine("Big numbers found in {0} ms", timer.ElapsedMilliseconds);
-
-            int totalSumOfDivisors = bigNumbers.AsParallel().Sum(x => SumOfDivisors(x));
+            var totalSumOfDivisors = Enumerable.Range(0, N).AsParallel().WithDegreeOfParallelism(N).Select(i => SumOfDivisors(GetBigNumber(i))).Sum();
+            
             timer.Stop();
             Console.WriteLine("Sum of divisors for N = {0} is {1}", N, totalSumOfDivisors);
             Console.WriteLine("Should be 1948659880 for N = 10");

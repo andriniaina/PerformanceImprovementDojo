@@ -1,4 +1,7 @@
 ﻿Original time to run the program : 27s.
 
 We're spending a lot of time waiting for the server, doing nothing on our side. We can launch several queries in parallel and get the 10 big numbers in 1,5s
-With this simple optimisation, we're down to 18s.
+With this simple optimisation, we're down to 18 seconds.
+
+As most of today's computers have more than one core, we can compute several SumOfDivisors at the same time.
+With this second trivial optimisation, we're down to 11 seconds

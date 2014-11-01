@@ -12,4 +12,7 @@ Doing it in the simplest way (we compute SumOfDivisors(n) even if another comput
 Then comes a little mathematical optimisation : 1 and n are divisors of n, and there are no divisors of n between n/2 and n. We can then reduce the size of the loop.
 We're now down to 7 seconds.
 If we generalize it by lowering the upper bound, we can reduce drastically the computation time.
-We're now down to 3s !
+We're now down to 3,2 seconds !
+
+We compute using long, but the value are far below the maximum int value. Changing every long to int make us save some precious miliseconds.
+We're now down to 2,8 seconds

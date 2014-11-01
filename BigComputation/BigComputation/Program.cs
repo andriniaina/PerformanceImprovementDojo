@@ -20,7 +20,7 @@ namespace BigComputation
             var bigNumbers = Enumerable.Range(0, N).AsParallel().WithDegreeOfParallelism(N).Select(GetBigNumber).ToArray();
             Console.WriteLine("Big numbers found in {0} ms", timer.ElapsedMilliseconds);
 
-            long totalSumOfDivisors = bigNumbers.AsParallel().Sum(x => SumOfDivisors(x));
+            int totalSumOfDivisors = bigNumbers.AsParallel().Sum(x => SumOfDivisors(x));
             timer.Stop();
             Console.WriteLine("Sum of divisors for N = {0} is {1}", N, totalSumOfDivisors);
             Console.WriteLine("Should be 1948659880 for N = 10");
@@ -28,13 +28,13 @@ namespace BigComputation
             Console.ReadLine();
         }
 
-        private static long GetBigNumber(int i)
+        private static int GetBigNumber(int i)
         {
             const string uriBase = "http://localhost:9006//givemeanumber/";
             var uri = new Uri(uriBase + i);
             var client = new WebClient();
             string response = client.DownloadString(uri);
-            var bigNumber = long.Parse(response.Split(' ').Last());
+            var bigNumber = int.Parse(response.Split(' ').Last());
             Console.WriteLine("{0} is a big number !", bigNumber);
             return bigNumber;
         }
@@ -42,19 +42,19 @@ namespace BigComputation
         //This function uses the CPU intensively on purpose
         //Altough it may be interesting to optimize this function, it's not the purpose of the exercise
         //So, don't touch it !
-        private static Dictionary<long, long> computedSumOfDivisors = new Dictionary<long, long>();
+        private static Dictionary<int, int> computedSumOfDivisors = new Dictionary<int, int>();
 
-        private static long SumOfDivisors(long bigNumber)
+        private static int SumOfDivisors(int bigNumber)
         {
-            long computedResult;
+            int computedResult;
             if(computedSumOfDivisors.TryGetValue(bigNumber, out computedResult))
             {
                 return computedResult;
             }
             Console.WriteLine("Summing divisors of {0}...", bigNumber);
-            long sumOfDivisors = 1 + bigNumber;
-            long maxValue = bigNumber;
-            for (long probableDivisor = 2; probableDivisor < maxValue; probableDivisor++)
+            int sumOfDivisors = 1 + bigNumber;
+            int maxValue = bigNumber;
+            for (int probableDivisor = 2; probableDivisor < maxValue; probableDivisor++)
             {
                 if (bigNumber % probableDivisor == 0)
                 {

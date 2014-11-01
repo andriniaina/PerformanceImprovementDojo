@@ -1,0 +1,4 @@
+﻿Original time to run the program : 27s.
+
+We're spending a lot of time waiting for the server, doing nothing on our side. We can launch several queries in parallel and get the 10 big numbers in 1,5s
+With this simple optimisation, we're down to 18s.

@@ -16,17 +16,9 @@ namespace BigComputation
         static void Main(string[] args)
         {
             var timer = Stopwatch.StartNew();
-            const string uriBase = "http://localhost:9006//givemeanumber/";
-            var bigNumbers = new List<long>();
-            for (int i = 0; i < N; i++)
-            {
-                var uri = new Uri(uriBase + i);
-                var client = new WebClient();
-                string response = client.DownloadString(uri);
-                var bigNumber = long.Parse(response.Split(' ').Last());
-                Console.WriteLine("{0} is a big number !", bigNumber);
-                bigNumbers.Add(bigNumber);
-            }
+
+            var bigNumbers = Enumerable.Range(0, N).AsParallel().WithDegreeOfParallelism(N).Select(GetBigNumber).ToArray();
+            Console.WriteLine("Big numbers found in {0} ms", timer.ElapsedMilliseconds);
 
             long totalSumOfDivisors = 0;
             foreach(var bigNumber in bigNumbers)
@@ -38,6 +30,17 @@ namespace BigComputation
             Console.WriteLine("Should be 1948659880 for N = 10");
             Console.WriteLine("Result found in {0} ms", timer.ElapsedMilliseconds);
             Console.ReadLine();
+        }
+
+        private static long GetBigNumber(int i)
+        {
+            const string uriBase = "http://localhost:9006//givemeanumber/";
+            var uri = new Uri(uriBase + i);
+            var client = new WebClient();
+            string response = client.DownloadString(uri);
+            var bigNumber = long.Parse(response.Split(' ').Last());
+            Console.WriteLine("{0} is a big number !", bigNumber);
+            return bigNumber;
         }
 
         //This function uses the CPU intensively on purpose

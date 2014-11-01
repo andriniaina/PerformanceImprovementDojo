@@ -42,8 +42,15 @@ namespace BigComputation
         //This function uses the CPU intensively on purpose
         //Altough it may be interesting to optimize this function, it's not the purpose of the exercise
         //So, don't touch it !
+        private static Dictionary<long, long> computedSumOfDivisors = new Dictionary<long, long>();
+
         private static long SumOfDivisors(long bigNumber)
         {
+            long computedResult;
+            if(computedSumOfDivisors.TryGetValue(bigNumber, out computedResult))
+            {
+                return computedResult;
+            }
             long sumOfDivisors = 0;
             Console.WriteLine("Summing divisors of {0}...", bigNumber);
             for (long probableDivisor = 1; probableDivisor <= bigNumber; probableDivisor++)
@@ -53,6 +60,7 @@ namespace BigComputation
                     sumOfDivisors += probableDivisor;
                 }
             }
+            computedSumOfDivisors[bigNumber] = sumOfDivisors;
             return sumOfDivisors;
         }
     }

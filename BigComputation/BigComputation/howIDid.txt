@@ -5,3 +5,6 @@ With this simple optimisation, we're down to 18 seconds.
 
 As most of today's computers have more than one core, we can compute several SumOfDivisors at the same time.
 With this second trivial optimisation, we're down to 11 seconds
+
+SumOfDivisors is a pure function, and we compute the same thing multiple times. Memoïzing the result may save us some time.
+Doing it in the simplest way (we compute SumOfDivisors(n) even if another computation with n is running), we're down to 8 seconds.
